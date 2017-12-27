@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'Express',
-    todos : [
+    todos: [
       { description : "Buy eggs",
         due : new Date(new Date().getTime() + 24 * 60 * 60 * 1000), // 1 day from now
         done : false
