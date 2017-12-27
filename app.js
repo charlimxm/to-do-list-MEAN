@@ -1,3 +1,6 @@
+var Mongoose = require('mongoose');
+var db = Mongoose.createConnection('localhost', 'to-do-list');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
