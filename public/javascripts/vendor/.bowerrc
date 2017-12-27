@@ -1,0 +1,1 @@
+{ "directory" : "public/javascripts/vendor" } /*This configuration file will tell Bower to install tools into the “public/javascripts/vendor” directory*/
