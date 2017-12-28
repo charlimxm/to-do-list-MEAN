@@ -1,19 +1,27 @@
-var express = require('express');
-var router = express.Router();
+/*
+ * GET home page.
+ */
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', {
-    title : 'Express',
-    todos : todos
-  });
-});
-
-exports.addTodo = function(todos) {
+exports.index = function(Todo) {
   return function(req, res) {
-    todos.push(req.body);
-    res.json({ todos : todos });
-  }
+    Todo.find({}, function(error, todos) {
+      res.render('index', {
+        title: 'Express',
+        todos : todos
+      });
+    });
+  };
 };
 
-module.exports = router;
+exports.addTodo = function(Todo) {
+  return function(req, res) {
+    var todo = new Todo(req.body);
+    todo.save(function(error, todo) {
+      if (error || !todo) {
+        res.json({ error : error });
+      } else {
+        res.json({ todo : todo });
+      }
+    });
+  };
+};
