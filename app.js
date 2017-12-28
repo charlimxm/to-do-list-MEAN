@@ -14,6 +14,9 @@ var app = express();
 var Mongoose = require('mongoose');
 var db = Mongoose.createConnection('localhost', 'to-do-list');
 
+var TodoSchema = require('./models/Todo.js').TodoSchema;
+var Todo = db.model('todos', TodoSchema);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
