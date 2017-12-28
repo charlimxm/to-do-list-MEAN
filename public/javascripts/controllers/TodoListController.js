@@ -13,6 +13,27 @@ function TodoListController($scope, $http) {
     $scope.todos = todos;
   };
 
+  $scope.update = function(todo) {
+    $http.put('/todo/' + todo._id + '.json', todo).success(function(data) {
+      if (!data.todo) {
+        alert(JSON.stringify(data));
+      }
+    });
+  };
+
+  $scope.updateList = function() {
+    $http.get('/todos.json').success(function(data) {
+      $scope.todos = data.todos;
+    });
+  };
+
+  setInterval(function() {
+    $scope.updateList();
+    $scope.$apply();
+  }, 30 * 60 * 1000); // update every 30 minutes;
+
+  $scope.updateList();
+
   $scope.addNewTodo = function() {
     $http.post('/todo.json', $scope.newTodo).success(function(data) {
       if (data.todo) {
